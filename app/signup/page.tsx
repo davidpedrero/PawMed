@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Messages from "./messages";
+import Messages from "../login/messages";
 
-export default function Login() {
+export default function Signup() {
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
       <Link
@@ -27,9 +27,27 @@ export default function Login() {
 
       <form
         className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
-        action="/auth/sign-in"
+        action="/auth/sign-up"
         method="post"
       >
+        <label className="text-md" htmlFor="first_name">
+          First Name
+        </label>
+        <input
+          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          name="first_name"
+          placeholder="First Name"
+          required
+        />
+        <label className="text-md" htmlFor="last_name">
+          Last Name
+        </label>
+        <input
+          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          name="last_name"
+          placeholder="Last Name"
+          required
+        />
         <label className="text-md" htmlFor="email">
           Email
         </label>
@@ -50,7 +68,7 @@ export default function Login() {
           required
         />
         <button className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2">
-          Sign In
+          Sign Up
         </button>
         <Messages />
       </form>

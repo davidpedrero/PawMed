@@ -1,12 +1,12 @@
-import { createClient } from '@/utils/supabase/server'
-import Link from 'next/link'
+import { createClient } from "@/utils/supabase/server";
+import Link from "next/link";
 
 export default async function AuthButton() {
-  const supabase = createClient()
+  const supabase = createClient();
 
   const {
     data: { user },
-  } = await supabase.auth.getUser()
+  } = await supabase.auth.getUser();
 
   return user ? (
     <div className="flex items-center gap-4">
@@ -18,11 +18,19 @@ export default async function AuthButton() {
       </form>
     </div>
   ) : (
-    <Link
-      href="/login"
-      className="py-2 px-3 flex rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
-    >
-      Login
-    </Link>
-  )
+    <>
+      <Link
+        href="/signup"
+        className="py-2 px-3 flex rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
+      >
+        Sign Up
+      </Link>
+      <Link
+        href="/login"
+        className="py-2 px-3 flex rounded-md no-underline bg-btn-background hover:bg-btn-background-hover ml-2"
+      >
+        Log In
+      </Link>
+    </>
+  );
 }

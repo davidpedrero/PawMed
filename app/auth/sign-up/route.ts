@@ -4,16 +4,22 @@ import { NextResponse } from 'next/server'
 export const dynamic = 'force-dynamic'
 
 export async function POST(request: Request) {
-  const requestUrl = new URL(request.url)
-  const formData = await request.formData()
-  const email = String(formData.get('email'))
+  const supabase = createClient();
+  const formData = await request.formData();
+  const email = String(formData.get('email'));
   const password = String(formData.get('password'))
-  const supabase = createClient()
+  const first_name = String(formData.get('first_name'));
+  const last_name = String(formData.get('last_name'));
+  const requestUrl = new URL(request.url);
 
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
+      data: {
+        first_name,
+        last_name,
+      },
       emailRedirectTo: `${requestUrl.origin}/auth/callback`,
     },
   })
